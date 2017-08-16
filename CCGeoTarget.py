@@ -1688,27 +1688,28 @@ outputFile = open(output_file, 'w', newline='')
 outputWriter = csv.writer(outputFile)
 count = 0
 
-outputWriter.writerow(["Owner", "Lists", "State", "Month", "Rental Price", "Owner Payment"])
+outputWriter.writerow(["Owner", "Lists", "State", "Month", "Rental Price", "Owner Payment", "Client", "Date"])
 # Read each row of input file
 for row in MonthlyReader:
 
     stringList = row
     emailList = stringList[6]
-    
+    date = stringList[0]
 
     if count != 0:
         
         rentalPrice = stringList[8]
+        client = stringList[5]
         
 
-        if emailList.endswith("Geo"):
+        if emailList.endswith("Geotarget"):
             if rentalPrice.isnumeric():
                 state = emailList[:2]
                 
                 for x in states[state]:
                     
                     ownerRentalPrice = float(rentalPrice) * float(states[state][x])/100
-                    outputWriter.writerow(["", x, state, month, ownerRentalPrice, ""])
+                    outputWriter.writerow(["", x, state, month, ownerRentalPrice, "", client, date])
                     
 
     count += 1

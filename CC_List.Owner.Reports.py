@@ -2,7 +2,7 @@ import json, requests, sys, csv, os
 
 count = 0
 paymentTotal = 0.0
-HEADERS = ["Owner", "List", "Client", "Send Date", "Month", "Sent", "Total Raised", "Transaxt Fee", "Rev Share Price", "Rental Price", "Owner Payment"]
+HEADERS = ["Owner", "List", "Client", "Send Date", "Month", "Sent", "Total Raised", "Transaxt Fee", "Rev Share Price", "Rental Price", "Owner Payment", "Delivered", "Clicked", "Opened"]
 
 
 # Set up input/ouput files
@@ -29,11 +29,14 @@ for row in MonthlyReader:
         revSharePrice = stringList[9]
         rentalPrice = stringList[10]
         ownerPayment = stringList[14]
+        delivered = stringList[19]
+        clicked = stringList[20]
+        opened = stringList[21]
 
         
         if owner == previous:
 
-            outputWriter.writerow([owner, emailList,client, date, month, sent, totalRaised, TAfee, revSharePrice, rentalPrice, ownerPayment])
+            outputWriter.writerow([owner, emailList,client, date, month, sent, totalRaised, TAfee, revSharePrice, rentalPrice, ownerPayment, delivered, clicked, opened])
             
         else:
             # skip for first round to avoid header

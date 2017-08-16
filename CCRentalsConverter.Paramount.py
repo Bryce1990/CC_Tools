@@ -6,7 +6,7 @@ import csv, shutil, os
 #Read in the raw data file and set output file
 input_file = input("Input Filename: ")
 output_file = input("Output Month_Directory\\Filename: ")
-WeeklyFile = open(input_file)
+WeeklyFile = open(input_file, encoding='utf8')
 WeeklyReader = csv.reader(WeeklyFile, delimiter = '\t')
 ClientDateList = ''
 
@@ -15,26 +15,30 @@ outputFile = open(output_file,'w',newline='')
 outputWriter = csv.writer(outputFile)
 count = 0
 
-outputWriter.writerow(["Date", "Bill Code", "Sent", "Campaign Code", "Raised", "Client", "List"])
+outputWriter.writerow(["Date", "Bill Code", "Sent", "Campaign Code", "Raised", "Client","Delivered" , "Clicked", "Opened"])
 #Read each row of input file
 for row in WeeklyReader:
    stringList = row
    position = 0
-   ClientDateList = str(stringList[56])
+   ClientDateList = str(stringList[57])
    
-   clientDateList = ClientDateList.split()
+   clientDateList = ClientDateList.split("(")
    #print(clientDateList)
-
+   print(count)
    date = stringList[2].split(' ')
    campaignCode = stringList[39]
    if count != 0:
       print(count)
-      client = clientDateList[0]
+      print(clientDateList)
+      #client = clientDateList[0]
       billCode = stringList[4]
       campaignCode= stringList[39]
-      List = clientDateList[2]
+      #List = clientDateList[2]
       rentOrRevShare = stringList[4]
-      outputWriter.writerow([date[0], billCode, stringList[5], campaignCode, "", client, List])
+      deliveredTotal = stringList[11]
+      clickedTotal = stringList[30]
+      openedTotal = stringList[34]
+      outputWriter.writerow([date[0], billCode, stringList[5], campaignCode, "", clientDateList[:1], deliveredTotal, clickedTotal, openedTotal])
    count += 1
    
 

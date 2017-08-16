@@ -23,10 +23,12 @@ for row in MonthlyReader:
         month = stringList[3]
         rentalPrice = stringList[4]
         ownerPayment = stringList[5]
+        client = stringList[8]
+        date = stringList[9]
 
         if owner == previous:
 
-            outputWriter.writerow([owner, emailList,'N/A', 'N/A', month, 'N/A', 'N/A', 'N/A', 'N/A', rentalPrice, ownerPayment])
+            outputWriter.writerow([owner, emailList,client, date, month, 'N/A', 'N/A', 'N/A', 'N/A', rentalPrice, ownerPayment])
 
         else:
             # skip for first round to avoid header
@@ -38,7 +40,7 @@ for row in MonthlyReader:
             outputFile = open(output_file, 'w', newline='')
             outputWriter = csv.writer(outputFile)
             outputWriter.writerow(HEADERS)
-            outputWriter.writerow([owner, emailList,'N/A', 'N/A', month, 'N/A', 'N/A', 'N/A', 'N/A', rentalPrice, ownerPayment])     
+            outputWriter.writerow([owner, emailList,client, date, month, 'N/A', 'N/A', 'N/A', 'N/A', rentalPrice, ownerPayment])     
             # write header to file
             # write list to file
             # close output file
