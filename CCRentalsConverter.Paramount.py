@@ -7,7 +7,7 @@ import csv, shutil, os
 input_file = input("Input Filename: ")
 output_file = input("Output Month_Directory\\Filename: ")
 WeeklyFile = open(input_file, encoding='utf8')
-WeeklyReader = csv.reader(WeeklyFile, delimiter = '\t')
+WeeklyReader = csv.reader(WeeklyFile, delimiter = ',')
 ClientDateList = ''
 
 #create output file
@@ -20,38 +20,34 @@ outputWriter.writerow(["Date", "Bill Code", "Sent", "Campaign Code", "Raised", "
 for row in WeeklyReader:
    stringList = row
    position = 0
+
    ClientDateList = str(stringList[57])
-   
+
    clientDateList = ClientDateList.split("(")
-   #print(clientDateList)
-   print(count)
+
+
    date = stringList[2].split(' ')
    campaignCode = stringList[39]
+
+   # Skip headers
    if count != 0:
-      print(count)
-      print(clientDateList)
-      #client = clientDateList[0]
+      # Set variables and write rows needed for reporting to List Owners
       billCode = stringList[4]
       campaignCode= stringList[39]
-      #List = clientDateList[2]
       rentOrRevShare = stringList[4]
       deliveredTotal = stringList[11]
       clickedTotal = stringList[30]
       openedTotal = stringList[34]
       outputWriter.writerow([date[0], billCode, stringList[5], campaignCode, "", clientDateList[:1], deliveredTotal, clickedTotal, openedTotal])
    count += 1
-   
 
-   
-   #clientDateList = stringList[55].split(' ')
-   
-   
-   
-  
+
+
+
+
+
+
 
 outputFile.close()
 
 #shutil.move('C:\\Users\\Bryce\\Desktop\\Python\\' + output_file, 'C:\\Users\\Bryce\\Desktop\\Conservative_Connector\\November2016')
-
-
-
